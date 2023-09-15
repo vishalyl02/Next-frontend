@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Set Axios global configuration
-axios.defaults.baseURL = 'https://user-kyuy.onrender.com'; // Replace with your FastAPI server URL
+axios.defaults.baseURL = 'https://user-pdb5.onrender.com/'; // Replace with your FastAPI server URL
 
 // Set CORS-related headers
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://next-frontend-umber.vercel.app'; // Replace with your frontend URL
@@ -44,16 +44,6 @@ export default function Home() {
     }
   };
 
-  const handleDeleteStudent = (studentId) => {
-    // Send a DELETE request to delete a student
-    axios.delete(`/delete-student/${studentId}`) // Use a relative path
-      .then(() => {
-        setStudents(students.filter((student) => student.id !== studentId));
-      })
-      .catch((error) => {
-        console.error('Error deleting student:', error);
-      });
-  };
 
   return (
     <div>
