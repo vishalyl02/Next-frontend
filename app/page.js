@@ -2,13 +2,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Set Axios global configuration
+axios.defaults.baseURL = 'https://user-kyuy.onrender.com'; // Replace with your FastAPI server URL
+
+// Set CORS-related headers
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://next-frontend-umber.vercel.app'; // Replace with your frontend URL
+axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
+
 export default function Home() {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState({ name: '', age: 0, year: '' });
 
   useEffect(() => {
     // Fetch students data from the FastAPI backend
-    axios.get('https://user-kyuy.onrender.com/') // Replace with your FastAPI server URL
+    axios.get('/') // Use a relative path, which will be handled by Axios global configuration
       .then((response) => {
         setStudents(response.data);
       })
@@ -20,7 +27,7 @@ export default function Home() {
   const handleCreateStudent = () => {
     // Send a POST request to create a new student
     try {
-      axios.post('https://user-kyuy.onrender.com/create-student/', newStudent) // Replace with your FastAPI server URL
+      axios.post('/create-student/', newStudent) // Use a relative path
         .then((response) => {
           setStudents([...students, response.data]);
           setNewStudent({ name: '', age: 0, year: '' });
@@ -39,7 +46,7 @@ export default function Home() {
 
   const handleDeleteStudent = (studentId) => {
     // Send a DELETE request to delete a student
-    axios.delete(`https://user-kyuy.onrender.com/delete-student/${studentId}`) // Replace with your FastAPI server URL
+    axios.delete(`/delete-student/${studentId}`) // Use a relative path
       .then(() => {
         setStudents(students.filter((student) => student.id !== studentId));
       })
