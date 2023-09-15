@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch students data from the FastAPI backend
-    axios.get('http://localhost:8000/') // Replace with your FastAPI server URL
+    axios.get('https://user-kyuy.onrender.com/') // Replace with your FastAPI server URL
       .then((response) => {
         setStudents(response.data);
       })
@@ -20,7 +20,7 @@ export default function Home() {
   const handleCreateStudent = () => {
     // Send a POST request to create a new student
     try {
-      axios.post('http://localhost:8000/create-student/', newStudent) // Replace with your FastAPI server URL
+      axios.post('https://user-kyuy.onrender.com/create-student/', newStudent) // Replace with your FastAPI server URL
         .then((response) => {
           setStudents([...students, response.data]);
           setNewStudent({ name: '', age: 0, year: '' });
@@ -39,7 +39,7 @@ export default function Home() {
 
   const handleDeleteStudent = (studentId) => {
     // Send a DELETE request to delete a student
-    axios.delete(`http://localhost:8000/delete-student/${studentId}`) // Replace with your FastAPI server URL
+    axios.delete(`https://user-kyuy.onrender.com/delete-student/${studentId}`) // Replace with your FastAPI server URL
       .then(() => {
         setStudents(students.filter((student) => student.id !== studentId));
       })
